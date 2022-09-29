@@ -1,3 +1,8 @@
 from django.contrib import admin
+from core import models
 
-# Register your models here.
+
+class ItemResultInLine(admin.TabularInline):
+    model = models.Person
+
+
