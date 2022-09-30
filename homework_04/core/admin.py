@@ -2,7 +2,8 @@ from django.contrib import admin
 from core import models
 
 
-class ItemResultInLine(admin.TabularInline):
-    model = models.Person
+@admin.register(models.Person)
+class Person(admin.ModelAdmin):
+    list_display = ("name", "phone")
 
 

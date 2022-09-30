@@ -1,6 +1,6 @@
 from django.contrib import admin
 from django.urls import path, include
-import core
+import core.views
 
 
 urlpatterns = [
