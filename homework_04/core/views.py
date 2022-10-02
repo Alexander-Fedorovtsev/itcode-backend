@@ -1,6 +1,6 @@
 import json
 
-from django.http import HttpResponse
+from django.http import HttpResponse, JsonResponse
 from django.shortcuts import render
 from django.utils import timezone
 from .models import Person
@@ -21,6 +21,6 @@ def persons(request):
             "name": p.name,
         })
     content = json.dumps(object_list)
-    return HttpResponse(object_list)
+    return JsonResponse({"results":object_list})
 
 # return render(request, "core/index.html")
