@@ -4,6 +4,7 @@ from django.http import HttpResponse, JsonResponse
 from django.shortcuts import render
 from django.utils import timezone
 from .models import Person
+from django.shortcuts import get_object_or_404
 
 
 def index(request):
@@ -21,6 +22,16 @@ def persons(request):
             "name": p.name,
         })
     content = json.dumps(object_list)
-    return JsonResponse({"results":object_list})
+    response = JsonResponse({"results": object_list}, status=400)
+    return response
 
+
+def person(request, id):
+    p = get_object_or_404(Person, id=id)
+    detail = {
+        "id": id,
+        "name": p.name,
+        "phone": p.phone,
+    }
+    return JsonResponse({"results": detail})
 # return render(request, "core/index.html")
