@@ -4,7 +4,7 @@ import core.views
 
 
 urlpatterns = [
-    path("", core.views.index),
-    path("persons/", core.views.persons),
-    path("persons/<int:id>", core.views.person)
+    path("", core.views.Index.as_view()),
+    path("persons/", core.views.PersonList.as_view()),
+    # path("persons/<int:id>", core.views.person)
 ]

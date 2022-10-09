@@ -5,13 +5,30 @@ from django.shortcuts import render
 from django.utils import timezone
 from .models import Person
 from django.shortcuts import get_object_or_404
+from django.views.generic import TemplateView, ListView
 
 
-def index(request):
-    now = timezone.now()
-    # response = HttpResponse(f'<h1>Hello django!</h1>{now}')
-    response = render(request, template_name="core/index.html", context={"dt": now})
-    return response
+class Index(TemplateView):
+    template_name = "core/index.html"
+
+    def get_context_data(self, **kwargs):
+        c = super().get_context_data(**kwargs)
+        c["person_name"] = "Masha"
+        return c
+
+
+class PersonList(ListView):
+    model = Person
+
+
+#     # template_name =
+
+
+# def index(request):
+#     now = timezone.now()
+#     # response = HttpResponse(f'<h1>Hello django!</h1>{now}')
+#     response = render(request, template_name="core/index.html", context={"dt": now})
+#     return response
 
 
 def persons(request):
@@ -26,12 +43,13 @@ def persons(request):
     return response
 
 
-def person(request, id):
-    p = get_object_or_404(Person, id=id)
-    detail = {
-        "id": id,
-        "name": p.name,
-        "phone": p.phone,
-    }
-    return JsonResponse({"results": detail})
+# def person(request, id):
+#     if request.method == "GET":
+#         p = get_object_or_404(Person, id=id)
+#         detail = {
+#             "id": id,
+#             "name": p.name,
+#             "phone": p.phone,
+#         }
+#         return JsonResponse(detail)
 # return render(request, "core/index.html")
